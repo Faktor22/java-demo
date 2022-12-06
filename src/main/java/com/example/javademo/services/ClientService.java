@@ -1,6 +1,7 @@
 package com.example.javademo.services;
 
 import com.example.javademo.domain.Client;
+import com.example.javademo.exceptions.ClientNotFoundException;
 import com.example.javademo.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,6 @@ public class ClientService {
     }
 
     public Client findClientById(Long id) {
-        return null;
+        return clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(String.format("client by id %s not found", id)));
     }
 }
